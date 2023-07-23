@@ -37,33 +37,6 @@ router.get('/food',[
 
       //get top 20 food items, under selected category and price, and sort them in decending order by price or other selected value
       // optemize seacrh by first selecting items in given city, then compare lat longs and distance, do not need to cal for all the values
-      // var sqlRequestQuery = `
-      // SELECT TOP 20
-      //   fi.name as food_name,
-      //   res.name as res_name, 
-      //   price, 
-      //   item_img, 
-      //   item_description, 
-      //   menu_category, 
-      //   res.lat, 
-      //   res.lng, 
-      //   RES.city,
-      //   (${earthRadius} * acos(cos(radians(${user_location.lat})) * cos(radians(res.lat)) * cos(radians(res.lng) - radians(${user_location.lng})) + sin(radians(${user_location.lat})) * sin(radians(res.lat)))) AS distance 
-      // FROM Food_item fi 
-      // INNER JOIN Restaurant as res 
-      // ON fi.restaurant_id = res.id 
-      // WHERE 
-      //   -- city = '${userCity}' AND this line will be commented. do we need this ?
-      //   (6371000 * acos(cos(radians(${user_location.lat})) * cos(radians(res.lat)) * cos(radians(res.lng) - radians(${user_location.lng})) + sin(radians(${user_location.lat})) * sin(radians(res.lat)))) <= ${radius} AND
-      //   menu_category ${categoryFormated} AND 
-      //   price ${priceBarFormated} 
-      // ORDER BY ${sort}
-      // `
-
-      user_location.lat = 43.65524289575089; 
-      user_location.lng = -79.3835844710046;
-      radius = 50;
-
       var sqlRequestQuery = `
       SELECT TOP 20
         fi.name as food_name,
@@ -86,8 +59,6 @@ router.get('/food',[
         price ${priceBarFormated} 
       ORDER BY ${sort}
       `
-
-
 
       //needs to be awaited for to get the data back first from server before running next line
       var result = await db.sql.request(sqlRequestQuery)
