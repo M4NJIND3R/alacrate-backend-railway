@@ -38,7 +38,7 @@ router.get('/food',[
       //get top 20 food items, under selected category and price, and sort them in decending order by price or other selected value
       // optemize seacrh by first selecting items in given city, then compare lat longs and distance, do not need to cal for all the values
       var sqlRequestQuery = `
-      SELECT TOP 20
+      SELECT TOP 60
         fi.name as food_name,
         res.name as res_name, 
         price, 
